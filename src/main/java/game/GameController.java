@@ -55,7 +55,7 @@ public class GameController implements Initializable {
         level.setItems(
                 FXCollections.observableArrayList("from 1 to 10", "from 1 to 100", "from 1 to 1000")
         );
-
+        difficulty.setItems(FXCollections.observableArrayList("given 5 shots", "given 2 shots", "given 1 shot"));
         guessField.setEditable(false);
         guessButton.setVisible(false);
         shotsLeft.setStyle("-fx-alignment:center;");
