@@ -67,21 +67,21 @@ public class GameController implements Initializable {
         if (level.getValue().equals("from 1 to 10")) {
             difficulty.setItems(FXCollections.observableArrayList("given 5 shots", "given 2 shots", "given 1 shot"));
             maxNum = 10;
-            difficulty.setValue("given 5 shots");
+//            difficulty.setValue("given 5 shots");
 //            shots = 5;
         } else if (level.getValue().equals("from 1 to 100")) {
             difficulty.setItems(FXCollections.observableArrayList("given 50 shots",
                     "given 20 shots",
                     "given 5 shots"));
             maxNum = 100;
-            difficulty.setValue("given 50 shots");
+//            difficulty.setValue("given 50 shots");
 //            shots = 50;
         } else {
             difficulty.setItems(FXCollections.observableArrayList("given 500 shots",
                     "given 200 shots",
                     "given 7 shots"));
             maxNum = 1000;
-            difficulty.setValue("given 500 shots");
+//            difficulty.setValue("given 500 shots");
 //            shots = 500;
         }
     }
