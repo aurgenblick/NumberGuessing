@@ -135,6 +135,7 @@ public class GameController implements Initializable {
         randomNum = rng.nextInt(maxNum);
         System.out.println(maxNum + " " + shots + " " + randomNum);
         guessField.clear();
+        guessField.setStyle("");
         guessField.setEditable(true);
         guessButton.setVisible(true);
         shotsLeft.setText(shots.toString() + " shots left\n ");
@@ -163,37 +164,40 @@ public class GameController implements Initializable {
 
     public void guess(ActionEvent actionEvent) {
         shots--;
-        int guessNum = Integer.parseInt(guessField.getText());
-        if (guessNum == randomNum) {
-            guessButton.setVisible(false);
-            guessField.setStyle("-fx-border-color: green; -fx-border-width: 5");
-            shotsLeft.setText("GREAT!");
-            guessField.setEditable(false);
-        } else {
-            if (guessField.getText() == null) {
-                committedNumbers.appendText("-\n");
-            } else if (guessNum > randomNum) {
-                committedNumbers.appendText("                 <" + guessNum + "\n");
-            } else if (guessNum < randomNum) {
-                committedNumbers.appendText("     " + guessNum + "<" + "\n");
-
-            } else if (guessNum == randomNum) {
-                committedNumbers.appendText(String.valueOf(guessNum));
-                shotsLeft.setText("GREAT!\n");
-            }
-            if (shots == 0) {
-                guessField.setEditable(false);
+        try {
+            int guessNum = Integer.parseInt(guessField.getText());
+            if (guessNum == randomNum) {
                 guessButton.setVisible(false);
-                guessField.setStyle("-fx-border-color: red; -fx-border-width: 5");
-                shotsLeft.setText("SORRY!\nThe number was\n");
-                guessField.setText(String.valueOf(randomNum));
-                startButton.requestFocus();
+                guessField.setStyle("-fx-border-color: green; -fx-border-width: 5");
+                shotsLeft.setText("GREAT!");
+                guessField.setEditable(false);
+            } else {
+                if (guessField.getText() == null) {
+                    committedNumbers.appendText("-\n");
+                } else if (guessNum > randomNum) {
+                    committedNumbers.appendText("                 <" + guessNum + "\n");
+                } else if (guessNum < randomNum) {
+                    committedNumbers.appendText("     " + guessNum + "<" + "\n");
+
+                } else if (guessNum == randomNum) {
+                    committedNumbers.appendText(String.valueOf(guessNum));
+                    shotsLeft.setText("GREAT!\n");
+                }
+                if (shots == 0) {
+                    guessField.setEditable(false);
+                    guessButton.setVisible(false);
+                    guessField.setStyle("-fx-border-color: red; -fx-border-width: 5");
+                    shotsLeft.setText("SORRY!\nThe number was\n");
+                    guessField.setText(String.valueOf(randomNum));
+                    startButton.requestFocus();
+                } else {
+                    guessField.clear();
+                    guessField.requestFocus();
+                    shotsLeft.setText(String.valueOf(shots) + " shots left");
+                }
             }
-            else {
-                guessField.clear();
-                guessField.requestFocus();
-                shotsLeft.setText(String.valueOf(shots) + " shots left");
-            }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
     }
 }
